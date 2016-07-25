@@ -1,0 +1,6 @@
+<!-- copy files -->
+<copy todir="D:\virtualbox_shared_folder">
+	<fileset dir=".">
+		<include name="*.py"/>
+	</fileset>
+</copy>
