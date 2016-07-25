@@ -11,7 +11,11 @@ def process_tcp_packet(packet):
         return
     http_layer = packet.getlayer(http.HTTPRequest)
     ip_layer = packet.getlayer(IP)
-    print '\n{0[src]} just requested a {1[Method]} {1[Host]}{1[Path]}'.format(ip_layer.fields, http_layer.fields)
+    # print '\n{0[src]} just requested a {1[Method]} {1[Host]}{1[Path]}'.format(ip_layer.fields, http_layer.fields)
+    #print '{0[src]},{0[dst]},{1[Method]},{1[Host]},{1[Path]}'.format(ip_layer.fields, http_layer.fields)
+    #print http_layer.fields["User-Agent"]
+    for key in http_layer.fields:
+        print key, http_layer.fields[key]
 
 # Start sniffing the network.
-sniff(filter='tcp', prn=process_tcp_packet)
+sniff(iface='enp0s3', filter='tcp', prn=process_tcp_packet)
