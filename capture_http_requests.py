@@ -1,7 +1,6 @@
 from scapy.all import IP, sniff
 from scapy.layers import http
 
-
 def process_tcp_packet(packet):
     '''
     Processes a TCP packet, and if it contains an HTTP request, it prints it.
