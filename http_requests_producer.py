@@ -1,6 +1,7 @@
 from scapy.all import IP, sniff
 from scapy.layers import http
 from confluent_kafka import Producer
+import sys
 
 options = dict()
 
@@ -38,10 +39,11 @@ def http_requests_producer(options):
         http_layer = packet.getlayer(http.HTTPRequest)
         ip_layer = packet.getlayer(IP)
         ahttp_request_list = [ip_layer.fields["src"],ip_layer.fields["dst"],http_layer.fields["Method"],http_layer.fields["Host"],http_layer.fields["Path"]]
+        ahttp_request_string = ','.join(ahttp_request_list)
 
         try:
             # Produce line (without newline)
-            p.produce(options["topic"], ahttp_request_list, callback=delivery_callback)
+            p.produce(options["topic"], ahttp_request_string, callback=delivery_callback)
             
         except BufferError as e:
             sys.stderr.write('%% Local producer queue is full ' \
@@ -54,14 +56,12 @@ def http_requests_producer(options):
         #       last produce()d message.
         p.poll(0)
 
-        # Wait until all messages have been delivered
-        sys.stderr.write('%% Waiting for %d deliveries\n' % len(p))
-        p.flush()
+        return ahttp_request_string
 
+    # Wait until all messages have been delivered
+    sys.stderr.write('%% Waiting for %d deliveries\n' % len(p))
+    p.flush()
 
-        return ahttp_request_list
-
-        # End of process_tcp_packets
 
     return process_tcp_packet
 
