@@ -32,7 +32,7 @@ except ImportError as e:
     with_progress = False
 
 # Kafka bootstrap server(s)
-bootstrap_servers = 'localhost'
+bootstrap_servers = 'laserbeak.million.noip.me:9092'
 
 
 
