@@ -16,7 +16,11 @@ def http_requests_producer(options):
 
     # Producer configuration
     # See https://github.com/edenhill/librdkafka/blob/master/CONFIGURATION.md
-    conf = {'bootstrap.servers': options["broker"]}
+    conf = {'bootstrap.servers': options["broker"],
+            'batch.num.messages': '2',
+            'api.version.request':'true',
+            'default.topic.config': {'request.required.acks':'-1',
+                                     'compression.codec':'snappy'}}
 
     # Create Producer instance
     p = Producer(**conf)
@@ -25,7 +29,7 @@ def http_requests_producer(options):
         if err:
             sys.stderr.write('%% Message failed delivery: %s\n' % err)
         else:
-            sys.stderr.write('%% Message delivered to %s [%d]\n' % \
+            sys.stderr.write('%% Message delivered to %s, partition[%d]\n' % \
                              (msg.topic(), msg.partition()))
 
     def process_tcp_packet(packet):
