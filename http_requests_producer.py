@@ -18,8 +18,10 @@ def http_requests_producer(options):
     # See https://github.com/edenhill/librdkafka/blob/master/CONFIGURATION.md
     conf = {'bootstrap.servers': options["broker"],
             'batch.num.messages': '2',
-            'api.version.request':'true',
-            'default.topic.config': {'request.required.acks':'-1',
+            'api.version.request':'false',
+            'broker.version.fallback':'0.9.0.0',
+            'batch.num.messages':'1000',
+            'default.topic.config': {'acks':'-1',
                                      'compression.codec':'snappy'}}
 
     # Create Producer instance
