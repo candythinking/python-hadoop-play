@@ -18,7 +18,7 @@ if __name__ == "__main__":
     # Configure the Streaming Context with a 5 second batch duration
     ssc = StreamingContext(sc,5)
 
-    # Creat DStream using KafkaUtils
+    # Create DStream using KafkaUtils
     kafka_stream = KafkaUtils.createDirectStream(ssc, [topic], {"metadata.broker.list": broker})
     
     # Test
