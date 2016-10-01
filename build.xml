@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="python-hadoop-play" default="copy-python-files" basedir=".">
 	<target name="copy-python-files">
-		<copy todir="D:\virtualbox_shared_folder">
-			<fileset dir="C:\Users\Phillip Kim\git\python-hadoop-play">
+		<copy todir="/media/sf_virtualbox_shared_folder">
+			<fileset dir="/home/philk/git/python-hadoop-play">
 				<include name="*.py"/>
 			</fileset>
 		</copy>
