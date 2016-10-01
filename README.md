@@ -7,5 +7,3 @@ Goal:
   3. Connect Spark to Kafka using inbuilt connectors
   4. Do some data transformation in pyspark and do something useful or crappy
   5. Something else
-
-  Hmm
